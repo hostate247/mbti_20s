@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <article class="start">
+        <button id="AA" type="button" class="btn btn-dark" onclick='start();'>START</button>
+    </article>
+    <article class="question">
+        <h2 id="title" class="text-center mt-5">문제</h2>
+        <input id="type" type="hidden" value="EI">
+        <button id="A" type="button" class="btn btn-dark mt-5">Dark</button>
+        <button id="B" type="button" class="btn btn-dark mt-3">Dark</button>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: calc(100/20*0%)" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </article>
+    <article class="result">
+        <img id="img" src="ENFJ.jpg" alt="planet">
+        <button id="buy" type="button" class="btn btn-dark mt-3"><a id="link" href="https://smartstore.naver.com/mealkitkorea"> 지금 구경하기</a></button>
+                <div class="share addthis_inline_share_toolbox"></div>
+        <button id="restart" onClick="window.location.reload()">다시하기</button>    
+        <button id="other"><a id="test" href="a">다른 테스트도 해보기</a></button>
+        <div id="made"><a id="mealkitkorea" href="https://www.instagram.com/mealkitkorea/">made by simply studio</a></div>
+    </article>
+    <input type="hidden" id="EI" value="0">
+    <input type="hidden" id="SN" value="0">
+    <input type="hidden" id="TF" value="0">
+    <input type="hidden" id="JP" value="0">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script>
+        var num = 1;
+        var q = {
+            1: {"title": "테스트 제목을 보자마자 든 생각은?", "type": "EI", "A": "심심했는데 잘 됐다!<br>얼른 해봐야지", "B": "명절 때 카톡 안하는디;"},
+            2: {"title": "추석 연휴에 오래 못 본 친구에게 <br>만나자는 연락이 왔다", "type": "EI", "A": "반가워하며 약속을 잡는다", "B": "넷플릭스 볼거 있는데...<br>약속 있는 척한다"},
+            3: {"title": "원래 가기로 했던 친척 집에<br>못 내려가는 상황이 되었다", "type": "EI", "A": "오히려 좋아! 집에서 뒹굴거리고 있을<br>친구에게 바로 전화를 건다", "B": "이불에서 나가지도 않은 채로<br>유튜브 알고리즘에 탑승한다"},
+            4: {"title": "친구들이 고기 구워먹자고 불러낸다", "type": "EI", "A": "오...좋은데? 어디라고??", "B": "아...나가기 귀찮은데ㅜ"},
+            5: {"title": "친구들과 1박 2일 여행 가는 길!<br>근데 차가 너무 막힌다", "type": "EI", "A": "볼륨을 올리고 콘서트 시작!<br>오늘은 우리가 블핑ㅋ", "B": "창 밖을 가만히 보며 풍경을 구경하다 잠든다"},
+            6: {"title": "며칠 전 백종원쌤 잡채 레시피를 본 나!<br>한 번 해보려는데 잘 기억이 나진 않는다", "type": "SN", "A": "영상을 다시 한 번 더 찾아본다", "B": "잡채 정도는 내 감으로 해도 충분하다"},
+            7: {"title": "친구들 스토리에 동그랗고 예쁘게 뜬<br>보름달 사진이 잔뜩 올라와 있다", "type": "SN", "A": "달 사진을 보며 예쁘다 생각하고 넘긴다", "B": "호다닥 뛰쳐나가 소원 빌고 사진 찍어서 나도 스도리에 올린다"},
+            8: {"title": "오랜만에 본 꼰대 친척이<br>또 말도 안 되는 이야기를 한다", "type": "SN", "A": "그렇구나...그런 생각이시구나...", "B": "어떻게 저런 생각을 할 수가 있지?<br>정말 이해할 수가 없다"},
+            9: {"title": "근사한 곳에 식사를 하러 왔다<br>맛있게 먹는 팁이 쓰여있다", "type": "SN", "A": "쓰여있는대로 먹어본다", "B": "나만의 방식이 바로 생각난다"},
+            10: {"title": "조카가 같이 조립하자고<br>로봇을 들고 왔는데 꽤나 수준이 높다", "type": "SN", "A": "설명서를 한 번 볼까?", "B": "해들 가지고 노는건데 이정도는 껌이지!<br>당장 조립을 시작한다"},
+            11: {"title": "연휴를 맞아 오랜만에 만난 친구들!<br>근데 갑자기 티격태격한다", "type": "TF", "A": "내 소중한 연휴를 이렇게 망칠 수 없다<br>얼른 진정시킨다", "B": "너무 당황스럽고 속상하다<br>눈치를 살피며 진정시킨다"},
+            12: {"title": "친구 : 나 추석 선물로 아이패드 받았다!", "type": "TF", "A": "프로? 에어?", "B": "헐 아이패드 대박!<br>너 아이패드 필요하다고 했었잖아~"},
+            13: {"title": "예전에 민정이가 너 욕하고 다녔는데...", "type": "TF", "A": "뭐라하고 다니디?<br>(팩트 아니기만 해봐)", "B": "그래...? 무슨 욕을...?<br>(서럽)"},
+            14: {"title": "준비한 선물을 친구에게 줬다<br>내가 듣고싶은 말은?", "type": "TF", "A": "와 센스 대박! 이런건 어디서 사?<br>나 좀 알려주라", "B": "완전 고마워!!<br>너한테 받아서 더 의미있다"},
+            15: {"title": "별로 안 친한 친구가 술을 먹자고 한다", "type": "TF", "A": "술 마실 사이는 아닌데?", "B": "어쩐 일이지? 무슨 일 있나?"},
+            16: {"title": "연휴 마지막 날 나는?", "type": "JP", "A": "이미 계획을 짜놨다", "B": "간지나게 숨 쉬기"},
+            17: {"title": "친구들이 우리 집에서 자고 갔다", "type": "JP", "A": "10시 - 청소<br>11시 - 빨래", "B": "이따 대충 치워야겠다"},
+            18: {"title": "늦은 시간 맥주를 먹자는 친구", "type": "JP", "A": "내일 일정이 있으니 다음에 본다", "B": "잠깐 볼까? 안주는 뭘로 할까?"},
+            19: {"title": "배달 예정 시간이 1시간이 넘도록 안 온다", "type": "JP", "A": "가게 문제야, 라이더 문제야?<br>바로 확인에 들어간다", "B": "주방에 먹을게 뭐가 있더라?<br>먹으면서 기다린다"},
+            20: {"title": "나랑 더 가까운 것은?", "type": "JP", "A": "정리정돈을 잘 하고 내 물건을 잘 찾는다", "B": "내 물건들이 어디 있는지 잘 안다<br>하지만 막상 찾으면 잘 없다..."},
+        }
+        var result = {
+            "ENFJ": {"link": href="https://smartstore.naver.com/mealkitkorea/products/5644044041", "img": src="./results/ENFJ.jpg"},
+            "ENFP": {"link": href="https://smartstore.naver.com/mealkitkorea/products/5644132339", "img": src="./results/ENFP.jpg"},
+            "ENTJ": {"link": href="https://smartstore.naver.com/mealkitkorea/products/5614529564", "img": src="./results/ENTJ.jpg"},
+            "ENTP": {"link": href="https://smartstore.naver.com/mealkitkorea/products/5644107620", "img": src="./results/ENTP.jpg"},
+            "ESFJ": {"link": href="https://smartstore.naver.com/mealkitkorea/products/5614478409", "img": src="./results/ESFJ.jpg"},
+            "ESFP": {"link": href="https://smartstore.naver.com/mealkitkorea/products/5611908779", "img": src="./results/ESFP.jpg"},
+            "ESTJ": {"link": href="https://smartstore.naver.com/mealkitkorea/products/5644071623", "img": src="./results/ESTJ.jpg"},
+            "ESTP": {"link": href="https://smartstore.naver.com/mealkitkorea/products/5644089384", "img": src="./results/ESTP.jpg"},
+            "INFJ": {"link": href="https://smartstore.naver.com/mealkitkorea/products/5644132339", "img": src="./results/INFJ.jpg"},
+            "INFP": {"link": href="https://smartstore.naver.com/mealkitkorea/products/5644044041", "img": src="./results/INFP.jpg"},
+            "INTJ": {"link": href="https://smartstore.naver.com/mealkitkorea/products/5644107620", "img": src="./results/INTJ.jpg"},
+            "INTP": {"link": href="https://smartstore.naver.com/mealkitkorea/products/5614529564", "img": src="./results/INTP.jpg"},
+            "ISFJ": {"link": href="https://smartstore.naver.com/mealkitkorea/products/5611908779", "img": src="./results/ISFJ.jpg"},
+            "ISFP": {"link": href="https://smartstore.naver.com/mealkitkorea/products/5614478409", "img": src="./results/ISFP.jpg"},
+            "ISTJ": {"link": href="https://smartstore.naver.com/mealkitkorea/products/5644089384", "img": src="./results/ISTJ.jpg"},
+            "ISTP": {"link": href="https://smartstore.naver.com/mealkitkorea/products/5644071623", "img": src="./results/ISTP.jpg"},
+        }
+        function start(){
+            $(".start").hide();
+            $(".question").show();
+            next();
+        }
+        $("#A").click(function(){
+            var type = $("#type").val();
+            var preValue = $("#"+type).val();
+            $("#"+type).val(parseInt(preValue)+1);
+            next();
+        });
+        $("#B").click(function(){
+            next();
+        });
+        function next() {
+            if (num == 21) {
+                $(".question").hide();
+                $(".result").show();
+                var mbti = "";
+                ($("#EI").val() < 3) ? mbti+="I" : mbti+="E";
+                ($("#SN").val() < 3) ? mbti+="N" : mbti+="S";
+                ($("#TF").val() < 3) ? mbti+="F" : mbti+="T";
+                ($("#JP").val() < 3) ? mbti+="P" : mbti+="J";
+                $("#img").attr("src",result[mbti]["img"]);
+                $("#link").attr("href",result[mbti]["link"]);
+            } else {
+                $(".progress-bar").attr('style', 'width: calc(100/20*'+num+'%)');
+                $("#title").html(q[num]["title"]);
+                $("#type").val(q[num]["type"]);
+                $("#A").html(q[num]["A"]);
+                $("#B").html(q[num]["B"]);
+                num++;
+            }    
+        }
+    </script>
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-612dd12affe6860d"></script>
+
+</body>
+</html>
